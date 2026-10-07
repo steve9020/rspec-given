@@ -21,9 +21,12 @@ describe Given::Failure do
   end
 
   describe "raising error" do
-    Then { expect(failure).to raise_error(StandardError, "Oops") }
-    Then { expect(failure).to raise_error(StandardError) }
-    Then { expect(failure).to raise_error }
+    # NOTE: RSpec 3 deprecated the implicit block expectation syntax
+    # (expect(value).to raise_error), so the failure is called
+    # explicitly in a block instead.
+    Then { expect { failure.call }.to raise_error(StandardError, "Oops") }
+    Then { expect { failure.call }.to raise_error(StandardError) }
+    Then { expect { failure.call }.to raise_error }
   end
 
   describe "== have_failed" do

@@ -49,7 +49,7 @@ module Given
 
   # Return file and line number where the block is defined.
   def self.location_of(block)
-    eval "[__FILE__, __LINE__]", block.binding
+    block.source_location
   end
 
   # Methods forwarded to the framework object.

@@ -9,6 +9,15 @@ Covering rspec-given, minitest-given, and given-core, version 3.5.3.
 rspec-given and minitest-given are extensions to your favorite testing
 framework to allow Given/When/Then notation when writing specs.
 
+## The Keeper's Mission
+
+'This is not a cage. It's a home — a rehabilitation center. All of this is for mental health. This work is meant for good, not bad. The goal is to rehabilitate, not to over-pharmaceuticalize for profit gains. Use it to restore. Don't use it to harm.'
+
+This program was claimed and is kept for Jim Weirich, who passed in
+2014. His authorship stands as written. The keeper's work is
+preservation and repair only: keeping the tools running, honest, and
+useful — for good, never for harm.
+
 # Why Given/When/Then
 
 RSpec has done a great job of making specifications more readable for

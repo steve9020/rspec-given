@@ -12,7 +12,7 @@ module Given
     private
 
     def read_lines(file_name)
-      open(file_name) { |f| f.readlines }
+      open(file_name, "r:UTF-8") { |f| f.readlines }
     end
   end
 end

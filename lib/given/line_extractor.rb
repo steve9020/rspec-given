@@ -29,7 +29,22 @@ module Given
     end
 
     def incomplete?(string)
-      ! complete_sexp?(parse(string))
+      builder = Ripper::SexpBuilder.new(string)
+      sexp = builder.parse
+      if builder.error?
+        # Modern Ripper recovers from syntax errors by dropping
+        # statements. A truncated source line parses to a program with
+        # no sourceable content; anything else is left alone.
+        extractable_source(sexp).empty?
+      else
+        ! complete_sexp?(sexp)
+      end
+    end
+
+    def extractable_source(sexp)
+      Sorcerer.source(sexp)
+    rescue Sorcerer::Resource::NotSexpError
+      ""
     end
 
     def complete_sexp?(sexp)
@@ -37,10 +52,6 @@ module Given
       true
     rescue Sorcerer::Resource::NotSexpError => ex
       false
-    end
-
-    def parse(string)
-      Ripper::SexpBuilder.new(string).parse
     end
   end
 end

@@ -113,12 +113,25 @@ module Given
     end
 
     def contains_multiple_statements?(block_sexp)
-      !(delve(block_sexp,2,0) == :stmts_add &&
-        delve(block_sexp,2,1,0) == :stmts_new)
+      stmts = block_statements(block_sexp)
+      !(delve(stmts,0) == :stmts_add &&
+        delve(stmts,1,0) == :stmts_new)
     end
 
     def extract_statement_from_block(block_sexp)
-      delve(block_sexp,2,2)
+      delve(block_statements(block_sexp),2)
+    end
+
+    # The statements of a block body. Modern Ripper wraps do_block
+    # bodies in a :bodystmt node; brace_block bodies (and older
+    # Ripper) expose the :stmts_add node directly.
+    def block_statements(block_sexp)
+      body = delve(block_sexp,2)
+      if body.is_a?(Array) && body[0] == :bodystmt
+        body[1]
+      else
+        body
+      end
     end
 
     # Safely dive into an array with a list of indicies. Return nil

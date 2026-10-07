@@ -131,8 +131,8 @@ describe Given::NaturalAssertion do
       FauxThen { ary[1] == 3 }
       Then { expect(msg).to match(/\bexpected: +NoMethodError/) }
       Then { expect(msg).to match(/\bto equal: +3$/) }
-      Then { expect(msg).to match(/\bNoMethodError.+NilClass\n +<- +ary\[1\] == 3$/) }
-      Then { expect(msg).to match(/\bNoMethodError.+NilClass\n +<- +ary\[1\]$/) }
+      Then { expect(msg).to match(/\bNoMethodError.+for nil\n +<- +ary\[1\] == 3$/) }
+      Then { expect(msg).to match(/\bNoMethodError.+for nil\n +<- +ary\[1\]$/) }
       Then { expect(msg).to match(/\bnil +<- +ary$/) }
     end
 
